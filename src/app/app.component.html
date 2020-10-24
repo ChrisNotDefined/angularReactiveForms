@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reactive Forms</title>
+</head>
+
+<body>
+  <div [formGroup]="group" class="formCard">
+    <h1>Formulario Reactivo</h1>
+    <h2>Ingresa los datos: </h2>
+    <fieldset>
+      <input formControlName="name" placeholder="Nombre" />
+      <div *ngIf="group.get('name').invalid && group.get('name').touched">
+        <p class="error" *ngIf="group.get('name').getError('required')">
+          Campo requerido
+        </p>
+      </div>
+    </fieldset>
+    <fieldset>
+      <input formControlName="lastName" placeholder="Apellidos" />
+      <div *ngIf="group.get('lastName').invalid && group.get('lastName').touched">
+        <p class="error" *ngIf="group.get('lastName').getError('required')">
+          Campo requerido
+        </p>
+      </div>
+    </fieldset>
+    <fieldset>
+      <input formControlName="age" placeholder="Edad" />
+      <div *ngIf="group.get('age').invalid && group.get('age').touched">
+        <p class="error" *ngIf="group.get('age').getError('required')">
+          Campo requerido
+        </p>
+        <p class="error" *ngIf="group.get('age').getError('notNumber')">
+          Debe ser un número
+        </p>
+        <p class="error" *ngIf="group.get('age').getError('over18')">
+          Debe ser mayor de 18
+        </p>
+      </div>
+    </fieldset>
+    <fieldset>
+      <select formControlName="civilStatus">
+        <option value=""></option>
+        <option value="Soltero">Soltero</option>
+        <option>Casado</option>
+      </select>
+      <div *ngIf="group.get('civilStatus').invalid && group.get('civilStatus').touched">
+        <p class="error" *ngIf="group.get('civilStatus').getError('required')">
+          Debes Seleccionar una opción
+        </p>
+      </div>
+    </fieldset>
+    <fieldset>
+      <label><input formControlName="sex" type="radio" value="Hombre" name="sex">Hombre</label>
+      <label><input formControlName="sex" type="radio" value="Mujer" name="sex">Mujer</label>
+      <div *ngIf="group.get('sex').invalid && group.get('sex').touched">
+        <p class="error" *ngIf="group.get('sex').getError('required')">
+          Debes seleccionar una opción
+        </p>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div *ngFor="let coment of getComments(); let commentIndex = index;">
+        <textarea placeholder="Comentario {{commentIndex + 1}}"></textarea>
+        <button class="delete" (click)='deleteComment(commentIndex)'>Eliminar Comentario</button>
+      </div>
+      <button (click)="addComment()" class="add">Agregar Comentario</button>
+    </fieldset>
+    <button class="submit" (click)="onSubmit()">Subir formulario</button>
+  </div>
+</body>
+</html>
