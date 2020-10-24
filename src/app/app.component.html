@@ -36,7 +36,7 @@
         <p class="error" *ngIf="group.get('age').getError('notNumber')">
           Debe ser un número
         </p>
-        <p class="error" *ngIf="group.get('age').getError('over18')">
+        <p class="error" *ngIf="group.get('age').getError('over18') && group.get('age').dirty">
           Debe ser mayor de 18
         </p>
       </div>

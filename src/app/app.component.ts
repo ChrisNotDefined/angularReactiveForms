@@ -29,8 +29,7 @@ export class AppComponent {
   validateAge(control: AbstractControl) {
     const value = control.value;
     let error = null;
-
-    if (!Number(value)) {
+    if (!Number(value) || value != "") {
       error = { ...error, notNumber: 'Debe ser un número' };
     } else {
       if (Number(value) < 18)
